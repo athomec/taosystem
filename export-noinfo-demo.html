@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>行政院農業委員會農田水利署桃園管理處 - 不動產巡查資訊管理系統</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="行政院農業委會員農田水利署桃園管理處,不動產巡查資訊管理系統,管理系統,不動產巡查">
+	<meta name="description" content="不動產巡查資訊管理系統" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="不動產巡查資訊管理系統" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body>
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('#export-from').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+			$('#export-to').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+			} catch (ex) { }
+		}
+	</script>
+	<!----------------視窗開始-------------------->
+<!-- 查詢匯出視窗-查無資料 -->
+<div class="modal fade" tabindex="-1" id="info-export-noinfo">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <button type="button" class="btn-close ms-1" data-bs-dismiss="modal" aria-label="Close"></button>
+            <iframe src="modal-info-export-noinfo.html" frameborder="0" scrolling="no" id="infoExportNoinfo"
+                onload="this.height=100"></iframe>
+                <script type="text/javascript">
+                    window.setInterval("reinitIframe('infoExportNoinfo')", 200);
+                </script>
+        </div>
+    </div>
+</div>
+<!----------------視窗結束-------------------->
+<header>
+    <nav class="navbar navbar-expand-md fixed-top px-2 px-md-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex white" href="index.html">
+                <p class="navbar-title font-bold">不動產巡查資訊管理系統</p>
+            </a>
+            <button class="navbar-toggler border-0 px-1 ms-auto me-2 js-side-menu-toggler" type="button"
+                data-target="#side-menu">
+                <img src="./assets/images/ic-list.svg" alt="巡查icon"> 巡查
+            </button>
+            <button class="navbar-toggler border-0 px-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#top-menu">
+                <img src="./assets/images/ic-setting.svg" alt="工具icon"> 工具
+            </button>
+
+            <div class="collapse navbar-collapse" id="top-menu">
+                <ul class="navbar-nav ms-auto js-tag-menu">
+                    <li class="me-2">
+                        <div class="input-group btn-input-group mb-3 mb-md-0">
+                            <input type="text" class="form-control bd-secondary-color" placeholder="關鍵字搜尋"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn bd-secondary-color" type="button" id="button-addon2">
+                                <img src="./assets/images/ic-search.svg" alt="搜尋">
+                            </button>
+                        </div>
+                    </li>
+                    <li class="nav-item js-tag-button">
+                        <a class="nav-link active" href="#" title="地圖比對">
+                            <img src="./assets/images/ic-flip.svg" alt="地圖比對">
+                            <p class="d-inline-block d-md-none">地圖比對</p>
+                        </a>
+                    </li>
+                    <li class="nav-item js-tag-button">
+                        <a class="nav-link" href="#" title="清除圖示">
+                            <img src="./assets/images/ic-location_off.svg" alt="清除圖示">
+                            <p class="d-inline-block d-md-none">清除圖示</p>
+                        </a>
+                    </li>
+                    <li class="nav-item js-tag-button">
+                        <a class="nav-link" href="#" title="後臺管理">
+                            <img src="./assets/images/ic-settings.svg" alt="後臺管理">
+                            <p class="d-inline-block d-md-none">後臺管理</p>
+                        </a>
+                    </li>
+                    <li class="nav-item js-tag-button">
+                        <a class="nav-link" href="#" title="個人資料" data-bs-toggle="modal"
+                            data-bs-target="#info-personal">
+                            <img src="./assets/images/ic-account-circle.svg" alt="個人資料">
+                            <p class="d-inline-block d-md-none">個人資料</p>
+                        </a>
+                    </li>
+                    <li class="nav-item js-tag-button border-0">
+                        <a class="nav-link" href="#" title="登出">
+                            <img src="./assets/images/ic-logout.svg" alt="登出">
+                            <p class="d-inline-block d-md-none">登出</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-----側邊選單開始----->
+<div class="d-flex">
+    <div class="side-menu js-side-menu" id="side-menu">
+        <button
+            class="btn btn-dark-secondary-color border-0 side-menu-toggler js-side-menu-toggler p-0 d-none d-md-flex"
+            type="button">
+            <img src="./assets/images/ic-chevron-left.svg" alt="導引列表icon">
+        </button>
+        <div class="side-menu-body bg-white scroll">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            <img src="./assets/images/ic-layer.svg" alt="圖層清單icon" class="me-2 me-md-3"> 圖層清單
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="d-flex">
+                                <div class="input-group btn-input-group mb-3">
+                                    <input type="text" class="form-control form-control-sm bd-primary-light-color"
+                                        placeholder="搜尋圖層" aria-label="Recipient's username"
+                                        aria-describedby="button-addon2">
+                                    <button class="btn btn-sm bd-primary-light-color" type="button" id="button-addon2">
+                                        <img src="./assets/images/ic-search-blue.svg" alt="搜尋">
+                                    </button>
+                                </div>
+                                <a href="#" class="btn circle-btn  btn-dark-primary-color p-0 ms-auto" title="清除圖層"><img
+                                        src="./assets/images/ic-unsupported.svg" alt=""></a>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    灌區地籍(110)
+                                </label>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <label class="form-check-label" for="defaultCheck2">
+                                    縣市界(110)
+                                </label>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                <label class="form-check-label" for="defaultCheck3">
+                                    鄉鎮市區界(110)
+                                </label>
+                            </div>
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                <label class="form-check-label" for="defaultCheck4">
+                                    村里界(110)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                <label class="form-check-label" for="defaultCheck5">
+                                    地段
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            <img src="./assets/images/ic-locate.svg" alt="定位功能icon" class="me-2 me-md-3"> 定位功能
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+                            <button class="side-menu-sub btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#administrative" aria-expanded="false">
+                                <div class="side-menu-icon"><img src="./assets/images/ic-bag.svg" alt="行政區定位icon"></div>
+                                行政區定位
+                            </button>
+                            <div class="collapse" id="administrative" data-bs-parent=".accordion-body">
+                                <div class="accordion-sub-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="city">縣市</label>
+                                        <select class="form-select form-select-sm" id="city"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="town">鄉鎮</label>
+                                        <select class="form-select form-select-sm" id="town"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="village">村里</label>
+                                        <select class="form-select form-select-sm" id="village"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button class="btn btn-sm btn-dark-primary-weak-color">定位</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="side-menu-sub btn mt-3" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#cadastre" aria-expanded="false">
+                                <div class="side-menu-icon"><img src="./assets/images/ic-aim.svg" alt="地籍定位"></div>
+                                地籍定位
+                            </button>
+                            <div class="collapse" id="cadastre" data-bs-parent=".accordion-body">
+                                <div class="accordion-sub-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="cadastre-city">縣市</label>
+                                        <select class="form-select form-select-sm" id="cadastre-city"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="cadastre-town">鄉鎮</label>
+                                        <select class="form-select form-select-sm" id="cadastre-town"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="cadastre-lot">地段</label>
+                                        <select class="form-select form-select-sm" id="cadastre-lot"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="cadastre-number">地號</label>
+                                        <select class="form-select form-select-sm" id="cadastre-number"
+                                            style="width: calc(100% - 40px);">
+                                            <option selected>請選擇</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button class="btn btn-dark-primary-weak-color btn-sm">定位</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            <img src="./assets/images/ic-check.svg" alt="外業巡查icon" class="me-2 me-md-3"> 外業巡查
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>
+                                    <button class="side-menu-item btn d-flex js-info-opener" data-target="#noinfo">
+                                        <img src="./assets/images/ic-domain.svg" alt="不動產巡查"
+                                            class="me-2"><span>不動產巡查</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            <img src="./assets/images/ic-record.svg" alt="巡查紀錄管理icon" class="me-2 me-md-3"> 巡查紀錄管理
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>
+                                    <button class="side-menu-item btn d-flex" data-bs-toggle="modal"
+                                        data-bs-target="#info-search">
+                                        <img src="./assets/images/ic-danger.svg" alt="不動產巡查(內業)" class="me-2">
+                                        <span>不動產巡查(內業)</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex" data-bs-toggle="modal"
+                                        data-bs-target="#info-search">
+                                        <img src="./assets/images/ic-forbidden.svg" alt="無權占用"
+                                            class="me-2"><span>無權占用</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex" data-bs-toggle="modal"
+                                        data-bs-target="#info-search">
+                                        <img src="./assets/images/ic-estate.svg" alt="有無違反法令(租約)"
+                                            class="me-2"><span>有無違反法令(租約)</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex" data-bs-toggle="modal"
+                                        data-bs-target="#info-search">
+                                        <img src="./assets/images/ic-risk.svg" alt="登革熱高風險"
+                                            class="me-2"><span>登革熱高風險</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex" data-bs-toggle="modal"
+                                        data-bs-target="#info-search">
+                                        <img src="./assets/images/ic-emergency.svg" alt="緊急通報"
+                                            class="me-2"><span>緊急通報</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                            <img src="./assets/images/ic-analyse.svg" alt="填報統計icon" class="me-2 me-md-3"> 填報統計
+                        </button>
+                    </h2>
+                    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>
+                                    <button class="side-menu-item btn d-flex">
+                                        <img src="./assets/images/ic-apartment.svg" alt="巡查單位統計"
+                                            class="me-2"><span>巡查單位統計</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex">
+                                        <img src="./assets/images/ic-worker.svg" alt="巡查人員統計"
+                                            class="me-2"><span>巡查人員統計</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="side-menu-item btn d-flex">
+                                        <img src="./assets/images/ic-statistics.svg" alt="完成率統計"
+                                            class="me-2"><span>完成率統計</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="d-black w-100 copyright tertiary-color text-center">行政院農業委員會<br class="d-inline d-xl-none">農田水利署桃園管理處
+        </p>
+    </div>
+    <!-----側邊選單結束----->
+    <!-----主要內容開始----->
+    <div class="side-content js-side-content">
+        <div class="map-content js-map-content"
+            style="background: url('assets/images/map-demo.jpg'); background-size: cover;">
+        </div>
+        <!-----資料標題開始----->
+        <div class="side-info-header bg-primary-weak-color white js-handler">
+            <img src="./assets/images/ic-risk.svg" alt="登革熱高風險icon" class="me-1"> 登革熱高風險資料
+            <button class="btn p-0 ms-auto js-info-closer"><img src="./assets/images/ic-close-light.svg"
+                    alt="關閉icon"></button>
+        </div>
+        <!-----查無資料開始----->
+        <div class="side-info js-side-info bg-pale-color scroll" id="noinfo">
+            <div class="side-info-body h-100">
+                <div class="row justify-content-between align-items-center flex-wrap g-0 h-100">
+                    <div class="col-md-6 d-flex font-xs mb-3">
+                        <p class="tertiary-color me-3">今日巡查筆數：0</p>
+                        <p class="tertiary-color">累積巡查筆數：0</p>
+                    </div>
+                    <div class="col-md-6 d-flex mb-3">
+                        <div class="input-group btn-input-group ms-auto me-2">
+                            <input type="text" class="form-control form-control-sm bd-primary-light-color"
+                                placeholder="搜尋圖層" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-sm bd-primary-light-color" type="button" id="button-addon2">
+                                <img src="./assets/images/ic-search-blue.svg" alt="搜尋">
+                            </button>
+                        </div>
+                        <a href="#filter-box" class="btn circle-btn btn-dark-secondary-color p-0 filter-btn collapsed" title="篩選"
+                            data-bs-toggle="collapse">
+                            <img src="./assets/images/ic-filter.svg" alt="篩選icon">
+                        </a>
+                        <div class="collapse" id="filter-box">
+                            <div class="row p-3 pb-2 font-xs">
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-photo">
+                                        <label class="form-check-label" for="filter-photo">
+                                            照片數
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-property">
+                                        <label class="form-check-label" for="filter-property">
+                                            財產別
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-check">
+                                        <label class="form-check-label" for="filter-check">
+                                            巡查時間
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-member">
+                                        <label class="form-check-label" for="filter-member">
+                                            巡查人員
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-city">
+                                        <label class="form-check-label" for="filter-city">
+                                            縣市
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-town">
+                                        <label class="form-check-label" for="filter-town">
+                                            鄉鎮市區
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-lot">
+                                        <label class="form-check-label" for="filter-lot">
+                                            地段
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-number">
+                                        <label class="form-check-label" for="filter-number">
+                                            地號
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-coordinate">
+                                        <label class="form-check-label" for="filter-coordinate">
+                                            座標
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-building">
+                                        <label class="form-check-label" for="filter-building">
+                                            地上物
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 notice-box bg-white tertiary-color" data-content="search-no-info">
+                        <img src="./assets/images/ic-search-off.svg" alt="查無相關資料icon"> 查無相關資料
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-----查無資料結束----->
+        <!-----查有資料開始----->
+        <div class="side-info js-side-info bg-pale-color" id="hasinfo">
+            <div class="side-info-body h-100">
+                <div class="row g-0">
+                    <div class="col-sm-6 d-flex font-xs mb-3">
+                        <button class="btn btn-sm btn-dark-secondary-xdark-color rounded-pill me-2"
+                            data-bs-toggle="modal" data-bs-target="#info-export">
+                            <img src="./assets/images/ic-export.svg" alt="匯出Excel icon" class="me-1"> 匯出Excel
+                        </button>
+                        <button class="btn btn-sm btn-dark-special-color rounded-pill" data-bs-toggle="modal"
+                            data-bs-target="#info-search">
+                            <img src="./assets/images/ic-fact-check-light.svg" alt="條件查詢 icon" class="me-1"> 條件查詢
+                        </button>
+                    </div>
+                    <div class="col-sm-6 d-flex mb-3">
+                        <div class="input-group btn-input-group ms-auto me-2">
+                            <input type="text" class="form-control form-control-sm bd-primary-light-color"
+                                placeholder="搜尋圖層" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-sm bd-primary-light-color" type="button" id="button-addon2">
+                                <img src="./assets/images/ic-search-blue.svg" alt="搜尋">
+                            </button>
+                        </div>
+                        <a href="#filter-box" class="btn circle-btn btn-dark-secondary-color p-0 filter-btn collapsed" title="篩選" data-bs-toggle="collapse">
+                            <img src="./assets/images/ic-filter.svg" alt="篩選icon">
+                        </a>
+                        <div class="collapse" id="filter-box">
+                            <div class="row p-3 pb-2 font-xs">
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-photo">
+                                        <label class="form-check-label" for="filter-photo">
+                                            照片數
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-property">
+                                        <label class="form-check-label" for="filter-property">
+                                            財產別
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-check">
+                                        <label class="form-check-label" for="filter-check">
+                                            巡查時間
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-member">
+                                        <label class="form-check-label" for="filter-member">
+                                            巡查人員
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-city">
+                                        <label class="form-check-label" for="filter-city">
+                                            縣市
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-town">
+                                        <label class="form-check-label" for="filter-town">
+                                            鄉鎮市區
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-lot">
+                                        <label class="form-check-label" for="filter-lot">
+                                            地段
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-number">
+                                        <label class="form-check-label" for="filter-number">
+                                            地號
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-coordinate">
+                                        <label class="form-check-label" for="filter-coordinate">
+                                            座標
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-4">
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" value="" id="filter-building">
+                                        <label class="form-check-label" for="filter-building">
+                                            地上物
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-table-wrapper scroll">
+                    <table class="table mb-0" data-toggle-column="last">
+                        <thead>
+                            <tr>
+                                <!--<th data-breakpoints="xs sm md" data-title="DOB">Date of Birth</th>-->
+                                <th data-breakpoints="xs">年度</th>
+                                <th data-breakpoints="xs sm">照片數</th>
+                                <th data-breakpoints="xs">巡查時間</th>
+                                <th data-breakpoints="xs sm">巡查人員</th>
+                                <th data-breakpoints="xs sm md">縣市</th>
+                                <th width="100">鄉鎮市區</th>
+                                <th width="100">地段</th>
+                                <th width="100">地號</th>
+                                <th data-breakpoints="xs sm md">村里別</th>
+                                <th data-breakpoints="xs sm md">使用人</th>
+                                <th data-breakpoints="xs">風險分級</th>
+                                <th width="180" data-breakpoints="xs"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>111</td>
+                                <td>2</td>
+                                <td>2022-04-26 16:20</td>
+                                <td>王曉明</td>
+                                <td>台中市</td>
+                                <td>西屯區</td>
+                                <td>地段地段</td>
+                                <td>153</td>
+                                <td>村里別</td>
+                                <td>使用人</td>
+                                <td>2</td>
+                                <td>
+                                    <button class="btn p-1" title="檢視" data-bs-toggle="modal"
+                                        data-bs-target="#info-view">
+                                        <img src="./assets/images/ic-view.svg" alt="檢視icon">
+                                    </button>
+                                    <button class="btn p-1" title="編輯" data-bs-toggle="modal"
+                                        data-bs-target="#info-edit">
+                                        <img src="./assets/images/ic-edit.svg" alt="檢視icon">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>111</td>
+                                <td>2</td>
+                                <td>2022-04-26 16:20</td>
+                                <td>王曉明</td>
+                                <td>台中市</td>
+                                <td>西屯區</td>
+                                <td>地段地段</td>
+                                <td>153</td>
+                                <td>村里別</td>
+                                <td>使用人</td>
+                                <td>2</td>
+                                <td>
+                                    <button class="btn p-1" title="檢視" data-bs-toggle="modal"
+                                        data-bs-target="#info-view">
+                                        <img src="./assets/images/ic-view.svg" alt="檢視icon">
+                                    </button>
+                                    <button class="btn p-1" title="編輯" data-bs-toggle="modal"
+                                        data-bs-target="#info-edit">
+                                        <img src="./assets/images/ic-edit.svg" alt="檢視icon">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>111</td>
+                                <td>2</td>
+                                <td>2022-04-26 16:20</td>
+                                <td>王曉明</td>
+                                <td>台中市</td>
+                                <td>西屯區</td>
+                                <td>地段地段</td>
+                                <td>153</td>
+                                <td>村里別</td>
+                                <td>使用人</td>
+                                <td>2</td>
+                                <td>
+                                    <button class="btn p-1" title="檢視" data-bs-toggle="modal"
+                                        data-bs-target="#info-view">
+                                        <img src="./assets/images/ic-view.svg" alt="檢視icon">
+                                    </button>
+                                    <button class="btn p-1" title="編輯" data-bs-toggle="modal"
+                                        data-bs-target="#info-edit">
+                                        <img src="./assets/images/ic-edit.svg" alt="檢視icon">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>111</td>
+                                <td>2</td>
+                                <td>2022-04-26 16:20</td>
+                                <td>王曉明</td>
+                                <td>台中市</td>
+                                <td>西屯區</td>
+                                <td>地段地段</td>
+                                <td>153</td>
+                                <td>村里別</td>
+                                <td>使用人</td>
+                                <td>2</td>
+                                <td>
+                                    <button class="btn p-1" title="檢視" data-bs-toggle="modal"
+                                        data-bs-target="#info-view">
+                                        <img src="./assets/images/ic-view.svg" alt="檢視icon">
+                                    </button>
+                                    <button class="btn p-1" title="編輯" data-bs-toggle="modal"
+                                        data-bs-target="#info-edit">
+                                        <img src="./assets/images/ic-edit.svg" alt="檢視icon">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>111</td>
+                                <td>2</td>
+                                <td>2022-04-26 16:20</td>
+                                <td>王曉明</td>
+                                <td>台中市</td>
+                                <td>西屯區</td>
+                                <td>地段地段</td>
+                                <td>153</td>
+                                <td>村里別</td>
+                                <td>使用人</td>
+                                <td>2</td>
+                                <td>
+                                    <button class="btn p-1" title="檢視" data-bs-toggle="modal"
+                                        data-bs-target="#info-view">
+                                        <img src="./assets/images/ic-view.svg" alt="檢視icon">
+                                    </button>
+                                    <button class="btn p-1" title="編輯" data-bs-toggle="modal"
+                                        data-bs-target="#info-edit">
+                                        <img src="./assets/images/ic-edit.svg" alt="檢視icon">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----查有資料結束----->
+</div>
+<!-----主要內容結束----->
+</div>
+</body>
+
+</html>

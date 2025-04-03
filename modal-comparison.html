@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<title>行政院農業委員會農田水利署桃園管理處 - 不動產巡查資訊管理系統</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="行政院農業委會員農田水利署桃園管理處,不動產巡查資訊管理系統,管理系統,不動產巡查">
+	<meta name="description" content="不動產巡查資訊管理系統" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta property="og:site_name" content="不動產巡查資訊管理系統" />
+	<meta property="og:image" content="assets/images/fb-img.png" />
+	<!--FB分享設定-->
+
+	<link rel="icon" href="assets/images/favicon.png" type="image/ico" />
+	<!--iconfont設定-->
+	<link rel="stylesheet" href="assets/style/all.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!--css設定-->
+</head>
+
+<body>
+	<!-- SCRIPTS -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/footable.js"></script>
+	<script src="assets/js/moment-with-locales.min.js"></script>
+	<script src="assets/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('#export-from').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+			$('#export-to').datetimepicker({
+				locale: 'zh-tw',
+				defaultDate: new Date(),
+				icons: {
+					time: "bi bi-clock",
+					date: "bi bi-calendar",
+					up: "bi bi-arrow-up",
+					down: "bi bi-arrow-down",
+					previous: "bi bi-chevron-left",
+					next: "bi bi-chevron-right",
+					today: "bi bi-clock",
+					clear: "bi bi-trash3"
+				}
+			});
+		});
+		//iframe高度控制
+		function reinitIframe(item) {
+			var iframe = document.getElementById(item);
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+			} catch (ex) { }
+		}
+	</script>
+	<div class="modal-header">
+    <h5 class="modal-title"><img src="./assets/images/ic-comparison-modal.svg" alt="檢視icon"> 巡查照片比對</h5>
+</div>
+<div class="modal-body px-0 px-md-4">
+    <div class="container">
+        <div class="row">
+            <h6 class="modal-body-title d-flex align-items-center mb-2">
+                <img src="./assets/images/ic-sticky-note.svg" alt="基本資料icon" class="me-1"> 條件查詢
+            </h6>
+        </div>
+        <div class="bg-primary-xxlight-color p-3 mb-4">
+            <div class="row">
+                <div class="col-sm-4 col-lg-3">
+                    <div class="d-flex justify-content-end align-items-center mb-2">
+                        <label for="comparison-year" class="flex-shrink-0 me-2">年度</label>
+                        <select class="form-select form-select-sm" id="comparison-year">
+                            <option selected>請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-3">
+                    <div class="d-flex justify-content-end align-items-center mb-2">
+                        <label for="comparison-city" class="flex-shrink-0 me-2">縣市</label>
+                        <select class="form-select form-select-sm" id="comparison-city">
+                            <option selected>請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-3">
+                    <div class="d-flex justify-content-end align-items-center mb-2">
+                        <label for="comparison-zone" class="flex-shrink-0 me-2">鄉鎮市區</label>
+                        <select class="form-select form-select-sm" id="comparison-zone">
+                            <option selected>請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-lg-3">
+                    <div class="d-flex justify-content-end align-items-center mb-2">
+                        <label for="comparison-location" class="flex-shrink-0 me-2">地段</label>
+                        <select class="form-select form-select-sm" id="comparison-location">
+                            <option selected>請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-3">
+                    <div class="d-flex justify-content-end align-items-center mb-2">
+                        <label for="comparison-location" class="flex-shrink-0 me-2">地號</label>
+                        <select class="form-select form-select-sm" id="comparison-location">
+                            <option selected>請選擇</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-3">
+                    <input class="form-control mb-2 mb-sm-0" type="text" placeholder="請輸入關鍵字">
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-dark-primary-color py-0 ms-auto" style="width: 126px;">
+                        <img src="./assets/images/ic-search-light.svg" alt="查詢" class="me-1">查詢
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h6 class="modal-body-title d-flex align-items-center mb-2">
+                <img src="./assets/images/ic-contact.svg" alt="照片比對icon" class="me-1"> 照片比對
+            </h6>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="bg-primary-xlight-color rounded-top px-3 py-2">
+                    <div class="row gy-2">
+                        <div class="col-md-6 col-xl-4">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
+                                <select class="form-select form-select-sm" id="comparison-select-year">
+                                    <option selected>請選擇</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-8">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <label for="comparison-cadastral" class="flex-shrink-0 me-2">地籍</label>
+                                <select class="form-select form-select-sm" id="comparison-cadastral">
+                                    <option selected>請選擇</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <div class="bg-primary-xxlight-color">
+                        <!-- 縮圖列表 -->
+                        <div class="thumbnail-wrapper px-4">
+                            <button class="thumbnail-prev">←</button>
+                            <button class="thumbnail-next">→</button>
+                            <div class="thumbnail">
+                                <div class="thumbnail-list">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 大圖展示 -->
+                    <div class="main-image">
+                        <button class="main-image-prev">
+                            <img src="./assets/images/ic-slide-prev.svg" alt="icon">
+                        </button>
+                        <button class="main-image-next">
+                            <img src="./assets/images/ic-slide-next.svg" alt="icon">
+                        </button>
+                        <button class="main-image-zoom-btn zoom">放大</button>
+                        <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-primary-xlight-color rounded-top px-3 py-2">
+                    <div class="row gy-2">
+                        <div class="col-md-6 col-xl-4">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
+                                <select class="form-select form-select-sm" id="comparison-select-year">
+                                    <option selected>請選擇</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <div class="bg-primary-xxlight-color">
+                        <!-- 縮圖列表 -->
+                        <div class="thumbnail-wrapper px-4">
+                            <button class="thumbnail-prev">←</button>
+                            <button class="thumbnail-next">→</button>
+                            <div class="thumbnail">
+                                <div class="thumbnail-list">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 6">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 7">
+                                    <img src="./assets/images/demo-pic2.jpg"
+                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 8">
+                                    <img src="./assets/images/demo-pic1.jpg"
+                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 9">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 大圖展示 -->
+                    <div class="main-image">
+                        <button class="main-image-prev">
+                            <img src="./assets/images/ic-slide-prev.svg" alt="icon">
+                        </button>
+                        <button class="main-image-next">
+                            <img src="./assets/images/ic-slide-next.svg" alt="icon">
+                        </button>
+                        <button class="main-image-zoom-btn zoom">放大</button>
+                        <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function initializeImageGallery(containerSelector) {
+        $(containerSelector).each(function () {
+            const $container = $(this);
+            let currentPosition = 0;
+            let currentIndex = 0;
+
+            const $thumbnailList = $container.find('.thumbnail-list');
+            const $thumbnails = $thumbnailList.find('img');
+            const $mainImage = $container.find('.main-image-pic');
+            const $thumbnailPrev = $container.find('.thumbnail-prev');
+            const $thumbnailNext = $container.find('.thumbnail-next');
+            const $mainImagePrev = $container.find('.main-image-prev');
+            const $mainImageNext = $container.find('.main-image-next');
+            const $zoomButton = $container.find('.main-image-zoom-btn');
+            const $mainImageContainer = $container.find('.main-image');
+
+            $thumbnails.first().addClass('active');
+            $mainImage.attr('src', $thumbnails.first().data('large-src'));
+
+            function getThumbsPerSlide() {
+                const width = window.innerWidth || $(window).width();
+                const thumbs = width > 1200 ? 7 : width > 768 ? 5 : 4;
+                console.log(`[${$container.attr('id') || containerSelector}] 視窗寬度: ${width}, 顯示縮圖數: ${thumbs}`);
+                return thumbs;
+            }
+
+            function updateMainImage() {
+                const largeSrc = $thumbnails.eq(currentIndex).data('large-src');
+                $mainImage.attr('src', largeSrc);
+                $thumbnails.removeClass('active').eq(currentIndex).addClass('active');
+
+                scrollToActiveThumbnail();
+            }
+
+            function scrollToActiveThumbnail() {
+                const thumbsPerSlide = getThumbsPerSlide();
+                const thumbWidth = $thumbnails.outerWidth(true);
+                const totalThumbs = $thumbnails.length;
+
+                // 若縮圖數量 <= 可顯示數量，則不移動
+                if (totalThumbs <= thumbsPerSlide) return;
+
+                const $activeThumb = $thumbnails.eq(currentIndex);
+                const activeIndex = currentIndex;
+                const visibleStartIndex = Math.abs(currentPosition) / thumbWidth;
+                const visibleEndIndex = visibleStartIndex + thumbsPerSlide - 1;
+
+                let newPosition = currentPosition;
+
+                if (activeIndex < visibleStartIndex) {
+                    // 縮圖在可視範圍左側，向左移動
+                    newPosition = -activeIndex * thumbWidth;
+                } else if (activeIndex > visibleEndIndex) {
+                    // 縮圖在可視範圍右側，向右移動
+                    newPosition = -(activeIndex - thumbsPerSlide + 1) * thumbWidth;
+                }
+
+                // 限制 newPosition 不要超出範圍
+                const maxPosition = -((totalThumbs - thumbsPerSlide) * thumbWidth);
+                newPosition = Math.max(maxPosition, Math.min(0, newPosition));
+
+                currentPosition = newPosition;
+                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+                updateNavButtons();
+            }
+
+
+            function updateNavButtons() {
+                const thumbsPerSlide = getThumbsPerSlide() || 4;
+                const thumbWidth = $thumbnails.outerWidth(true);
+                const totalThumbs = $thumbnails.length;
+                const maxPosition = -((totalThumbs - thumbsPerSlide) * thumbWidth);
+
+                // 如果縮圖數少於等於 thumbsPerSlide，隱藏兩個按鈕
+                if (totalThumbs <= thumbsPerSlide) {
+                    $thumbnailPrev.add($thumbnailNext).addClass('hide');
+                } else {
+                    $thumbnailPrev.toggleClass('hide', currentPosition >= 0);
+                    $thumbnailNext.toggleClass('hide', currentPosition <= maxPosition);
+                }
+            }
+
+            $thumbnails.click(function () {
+                currentIndex = $(this).index();
+                updateMainImage();
+            });
+
+            $thumbnailNext.click(function () {
+                const thumbWidth = $thumbnails.outerWidth(true);
+                const thumbsPerSlide = getThumbsPerSlide();
+                const slideWidth = thumbsPerSlide * thumbWidth;
+                const maxPosition = -(($thumbnails.length - thumbsPerSlide) * thumbWidth);
+                currentPosition = Math.max(currentPosition - slideWidth, maxPosition);
+                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+                updateNavButtons();
+            });
+
+            $thumbnailPrev.click(function () {
+                const thumbWidth = $thumbnails.outerWidth(true);
+                const thumbsPerSlide = getThumbsPerSlide();
+                const slideWidth = thumbsPerSlide * thumbWidth;
+                currentPosition = Math.min(currentPosition + slideWidth, 0);
+                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+                updateNavButtons();
+            });
+
+            $mainImageNext.click(function () {
+                currentIndex = (currentIndex + 1) % $thumbnails.length;
+                updateMainImage();
+            });
+
+            $mainImagePrev.click(function () {
+                currentIndex = (currentIndex - 1 + $thumbnails.length) % $thumbnails.length;
+                updateMainImage();
+            });
+
+            $zoomButton.click(function () {
+                $mainImageContainer.toggleClass('zoomed');
+                if ($mainImageContainer.hasClass('zoomed')) {
+                    $mainImage.css({ 'transform': 'scale(2)', 'cursor': 'grab' });
+                    $mainImage.draggable({
+                        cursor: 'grab',
+                        drag: function (event, ui) {
+                            const rect = $mainImage[0].getBoundingClientRect();
+                            const containerRect = $mainImageContainer[0].getBoundingClientRect();
+                            const scale = 2; // Matches the scale(2) in transform
+                            const imgWidth = $mainImage.width();
+                            const imgHeight = $mainImage.height();
+
+                            // Calculate boundaries based on scaled image size
+                            const scaledWidth = imgWidth * scale;
+                            const scaledHeight = imgHeight * scale;
+
+                            // Calculate maximum drag limits to keep image within container
+                            const maxLeft = (scaledWidth - containerRect.width) / 2;
+                            const maxTop = (scaledHeight - containerRect.height) / 2;
+                            const minLeft = -maxLeft;
+                            const minTop = -maxTop;
+
+                            // Constrain the position
+                            ui.position.left = Math.min(maxLeft, Math.max(minLeft, ui.position.left));
+                            ui.position.top = Math.min(maxTop, Math.max(minTop, ui.position.top));
+                        }
+                    });
+                    $(this).text('縮小').addClass("out");
+                } else {
+                    $mainImage.css({ 'transform': 'none', 'left': '0', 'top': '0' });
+                    $mainImage.draggable('destroy');
+                    $(this).text('放大').removeClass("out");
+                }
+            });
+
+            updateNavButtons();
+
+            $(window).on('resize', function () {
+                currentPosition = 0;
+                $thumbnailList.css('transform', 'translateX(0px)');
+                updateNavButtons();
+                // Reset zoom if active
+                if ($mainImageContainer.hasClass('zoomed')) {
+                    $mainImage.css({ 'left': '0', 'top': '0' });
+                }
+            });
+        });
+    }
+
+    // Usage
+    $(document).ready(function () {
+        initializeImageGallery('.slider-container');
+    });
+</script>
+</body>
+
+</html>
