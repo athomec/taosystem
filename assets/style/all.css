@@ -14892,6 +14892,9 @@ hr {
   max-height: 768px;
   -o-object-fit: cover;
      object-fit: cover; }
+  @media (max-width: 768px) {
+    #modalImage {
+      height: auto !important; } }
 
 #prevImage, #nextImage {
   position: absolute;
