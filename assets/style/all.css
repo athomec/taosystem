@@ -14935,6 +14935,15 @@ hr {
       -ms-flex-pack: end;
           justify-content: flex-end; }
 
+.modal-backdrop + .modal-backdrop {
+  z-index: 1070; }
+
+#info-view {
+  z-index: 1060; }
+
+#info-img {
+  z-index: 1080; }
+
 /*------------------------登入頁設定開始----------------------------*/
 .wrapper[data-bg="login"] {
   min-height: 100vh;
