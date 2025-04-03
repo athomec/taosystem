@@ -64,15 +64,19 @@
 			});
 		});
 		//iframe高度控制
+
 		function reinitIframe(item) {
-			var iframe = document.getElementById(item);
-			try {
-				var bHeight = iframe.contentWindow.document.body.scrollHeight;
-				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-				var height = Math.max(bHeight, dHeight);
-				iframe.height = height;
-			} catch (ex) { }
-		}
+				var iframe = document.getElementById(item);
+				try {
+					var bHeight = iframe.contentWindow.document.body.scrollHeight;
+					var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+					iframe.height = bHeight; // 直接使用 body 的高度
+					// 或使用 dHeight，取決於你的需求
+				} catch (ex) { }
+			}
+
+		
+
 	</script>
 	<div class="modal-header">
     <h5 class="modal-title"><img src="./assets/images/ic-comparison-modal.svg" alt="檢視icon"> 巡查照片比對</h5>
