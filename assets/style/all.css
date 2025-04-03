@@ -14888,7 +14888,8 @@ hr {
   transition: all 0.2s ease; }
 
 #modalImage {
-  height: 768px;
+  height: calc(100vh - 100px);
+  max-height: 768px;
   -o-object-fit: cover;
      object-fit: cover; }
 
