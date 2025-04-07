@@ -14789,7 +14789,8 @@ hr {
     overflow: hidden;
     white-space: nowrap; }
     .thumbnail-prev.hide, .thumbnail-next.hide {
-      background: #F2FBFB !important; }
+      background: #F2FBFB !important;
+      pointer-events: none; }
   .thumbnail-prev {
     left: 0;
     background: url("../images/ic-slide-prev.svg") no-repeat center #F2FBFB; }
@@ -14830,7 +14831,8 @@ hr {
       -webkit-filter: invert(58%) sepia(72%) saturate(4111%) hue-rotate(160deg) brightness(93%) contrast(101%);
               filter: invert(58%) sepia(72%) saturate(4111%) hue-rotate(160deg) brightness(93%) contrast(101%); }
     .main-image-prev.hide, .main-image-next.hide {
-      display: none; }
+      display: none;
+      pointer-events: none; }
   .main-image-prev {
     left: 0;
     border-radius: 0 10px 10px 0; }
@@ -14943,6 +14945,9 @@ hr {
 
 #info-img {
   z-index: 1080; }
+
+.comparison-result {
+  display: none; }
 
 /*------------------------登入頁設定開始----------------------------*/
 .wrapper[data-bg="login"] {

@@ -88,7 +88,7 @@
                 <img src="./assets/images/ic-sticky-note.svg" alt="基本資料icon" class="me-1"> 條件查詢
             </h6>
         </div>
-        <div class="bg-primary-xxlight-color p-3 mb-4">
+        <div class="bg-primary-xxlight-color p-3">
             <div class="row">
                 <div class="col-sm-4 col-lg-3">
                     <div class="d-flex justify-content-end align-items-center mb-2">
@@ -151,316 +151,337 @@
                     <input class="form-control mb-2 mb-sm-0" type="text" placeholder="請輸入關鍵字">
                 </div>
                 <div class="col-lg-3">
-                    <button class="btn btn-dark-primary-color py-0 ms-auto" style="width: 126px;">
+                    <button class="btn btn-dark-primary-color py-0 ms-auto js-comparison-search" style="width: 126px;">
                         <img src="./assets/images/ic-search-light.svg" alt="查詢" class="me-1">查詢
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <h6 class="modal-body-title d-flex align-items-center mb-2">
-                <img src="./assets/images/ic-contact.svg" alt="照片比對icon" class="me-1"> 照片比對
-            </h6>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="bg-primary-xlight-color rounded-top px-3 py-2">
-                    <div class="row gy-2">
-                        <div class="col-md-6 col-xl-4">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
-                                <select class="form-select form-select-sm" id="comparison-select-year">
-                                    <option selected>請選擇</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+        <div class="comparison-result js-comparison-result mt-4">
+            <div class="row">
+                <h6 class="modal-body-title d-flex align-items-center mb-2">
+                    <img src="./assets/images/ic-contact.svg" alt="照片比對icon" class="me-1"> 照片比對
+                </h6>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="bg-primary-xlight-color rounded-top px-3 py-2">
+                        <div class="row gy-2">
+                            <div class="col-md-6 col-xl-4">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
+                                    <input class="form-control mb-2 mb-sm-0" type="text" id="comparison-select-year" value="113" readonly>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-xl-8">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <label for="comparison-cadastral" class="flex-shrink-0 me-2">地籍</label>
-                                <select class="form-select form-select-sm" id="comparison-cadastral">
-                                    <option selected>請選擇</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-container">
-                    <div class="bg-primary-xxlight-color">
-                        <!-- 縮圖列表 -->
-                        <div class="thumbnail-wrapper px-4">
-                            <button class="thumbnail-prev">←</button>
-                            <button class="thumbnail-next">→</button>
-                            <div class="thumbnail">
-                                <div class="thumbnail-list">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
+                            <div class="col-md-6 col-xl-8">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <label for="comparison-cadastral" class="flex-shrink-0 me-2">地籍</label>
+                                    <input class="form-control mb-2 mb-sm-0" type="text" id="comparison-cadastral" value="桃園市中壢區松勇二街123456" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 大圖展示 -->
-                    <div class="main-image">
-                        <button class="main-image-prev">
-                            <img src="./assets/images/ic-slide-prev.svg" alt="icon">
-                        </button>
-                        <button class="main-image-next">
-                            <img src="./assets/images/ic-slide-next.svg" alt="icon">
-                        </button>
-                        <button class="main-image-zoom-btn zoom">放大</button>
-                        <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="bg-primary-xlight-color rounded-top px-3 py-2">
-                    <div class="row gy-2">
-                        <div class="col-md-6 col-xl-4">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
-                                <select class="form-select form-select-sm" id="comparison-select-year">
-                                    <option selected>請選擇</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                    <div class="slider-container">
+                        <div class="bg-primary-xxlight-color">
+                            <!-- 縮圖列表 -->
+                            <div class="thumbnail-wrapper px-4">
+                                <button class="thumbnail-prev">←</button>
+                                <button class="thumbnail-next">→</button>
+                                <div class="thumbnail">
+                                    <div class="thumbnail-list">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+    
+                        <!-- 大圖展示 -->
+                        <div class="main-image">
+                            <button class="main-image-prev">
+                                <img src="./assets/images/ic-slide-prev.svg" alt="icon">
+                            </button>
+                            <button class="main-image-next">
+                                <img src="./assets/images/ic-slide-next.svg" alt="icon">
+                            </button>
+                            <button class="main-image-zoom-btn zoom">放大</button>
+                            <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
                         </div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="bg-primary-xxlight-color">
-                        <!-- 縮圖列表 -->
-                        <div class="thumbnail-wrapper px-4">
-                            <button class="thumbnail-prev">←</button>
-                            <button class="thumbnail-next">→</button>
-                            <div class="thumbnail">
-                                <div class="thumbnail-list">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 6">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 7">
-                                    <img src="./assets/images/demo-pic2.jpg"
-                                        data-large-src="./assets/images/demo-pic2.jpg" alt="Image 8">
-                                    <img src="./assets/images/demo-pic1.jpg"
-                                        data-large-src="./assets/images/demo-pic1.jpg" alt="Image 9">
+                <div class="col-md-6">
+                    <div class="bg-primary-xlight-color rounded-top px-3 py-2">
+                        <div class="row gy-2">
+                            <div class="col-md-6 col-xl-4">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <label for="comparison-select-year" class="flex-shrink-0 me-2">年度</label>
+                                    <select class="form-select form-select-sm" id="comparison-select-year">
+                                        <option selected>請選擇</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 大圖展示 -->
-                    <div class="main-image">
-                        <button class="main-image-prev">
-                            <img src="./assets/images/ic-slide-prev.svg" alt="icon">
-                        </button>
-                        <button class="main-image-next">
-                            <img src="./assets/images/ic-slide-next.svg" alt="icon">
-                        </button>
-                        <button class="main-image-zoom-btn zoom">放大</button>
-                        <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
+                    <div class="slider-container">
+                        <div class="bg-primary-xxlight-color">
+                            <!-- 縮圖列表 -->
+                            <div class="thumbnail-wrapper px-4">
+                                <button class="thumbnail-prev">←</button>
+                                <button class="thumbnail-next">→</button>
+                                <div class="thumbnail">
+                                    <div class="thumbnail-list">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 1">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 2">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 3">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 4">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 5">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 6">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 7">
+                                        <img src="./assets/images/demo-pic2.jpg"
+                                            data-large-src="./assets/images/demo-pic2.jpg" alt="Image 8">
+                                        <img src="./assets/images/demo-pic1.jpg"
+                                            data-large-src="./assets/images/demo-pic1.jpg" alt="Image 9">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- 大圖展示 -->
+                        <div class="main-image">
+                            <button class="main-image-prev">
+                                <img src="./assets/images/ic-slide-prev.svg" alt="icon">
+                            </button>
+                            <button class="main-image-next">
+                                <img src="./assets/images/ic-slide-next.svg" alt="icon">
+                            </button>
+                            <button class="main-image-zoom-btn zoom">放大</button>
+                            <img src="./assets/images/demo-pic1.jpg" alt="Large Image" class="main-image-pic">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 <script>
-    function initializeImageGallery(containerSelector) {
-        $(containerSelector).each(function () {
-            const $container = $(this);
-            let currentPosition = 0;
-            let currentIndex = 0;
+function initializeImageGallery(containerSelector) {
+    $(containerSelector).each(function () {
+        const $container = $(this);
+        let currentPosition = 0;
+        let currentIndex = 0;
 
-            const $thumbnailList = $container.find('.thumbnail-list');
-            const $thumbnails = $thumbnailList.find('img');
-            const $mainImage = $container.find('.main-image-pic');
-            const $thumbnailPrev = $container.find('.thumbnail-prev');
-            const $thumbnailNext = $container.find('.thumbnail-next');
-            const $mainImagePrev = $container.find('.main-image-prev');
-            const $mainImageNext = $container.find('.main-image-next');
-            const $zoomButton = $container.find('.main-image-zoom-btn');
-            const $mainImageContainer = $container.find('.main-image');
+        const $thumbnailList = $container.find('.thumbnail-list');
+        let $thumbnails = $thumbnailList.find('img');
+        const $mainImage = $container.find('.main-image-pic');
+        const $thumbnailPrev = $container.find('.thumbnail-prev');
+        const $thumbnailNext = $container.find('.thumbnail-next');
+        const $mainImagePrev = $container.find('.main-image-prev');
+        const $mainImageNext = $container.find('.main-image-next');
+        const $zoomButton = $container.find('.main-image-zoom-btn');
+        const $mainImageContainer = $container.find('.main-image');
 
-            $thumbnails.first().addClass('active');
-            $mainImage.attr('src', $thumbnails.first().data('large-src'));
+        $thumbnails.first().addClass('active');
+        $mainImage.attr('src', $thumbnails.first().data('large-src'));
 
-            function getThumbsPerSlide() {
-                const width = window.innerWidth || $(window).width();
-                const thumbs = width > 1200 ? 7 : width > 768 ? 5 : 4;
-                console.log(`[${$container.attr('id') || containerSelector}] 視窗寬度: ${width}, 顯示縮圖數: ${thumbs}`);
-                return thumbs;
-            }
+        function getThumbsPerSlide() {
+            const windowWidth = window.innerWidth || $(window).width();
+            const thumbWidth = $thumbnails.outerWidth(true); // 包含margin的實際寬度
+            const containerWidth = $thumbnailList.parent().width(); // 使用父容器的寬度
 
-            function updateMainImage() {
-                const largeSrc = $thumbnails.eq(currentIndex).data('large-src');
-                $mainImage.attr('src', largeSrc);
-                $thumbnails.removeClass('active').eq(currentIndex).addClass('active');
-
-                scrollToActiveThumbnail();
-            }
-
-            function scrollToActiveThumbnail() {
-                const thumbsPerSlide = getThumbsPerSlide();
-                const thumbWidth = $thumbnails.outerWidth(true);
-                const totalThumbs = $thumbnails.length;
-
-                // 若縮圖數量 <= 可顯示數量，則不移動
-                if (totalThumbs <= thumbsPerSlide) return;
-
-                const $activeThumb = $thumbnails.eq(currentIndex);
-                const activeIndex = currentIndex;
-                const visibleStartIndex = Math.abs(currentPosition) / thumbWidth;
-                const visibleEndIndex = visibleStartIndex + thumbsPerSlide - 1;
-
-                let newPosition = currentPosition;
-
-                if (activeIndex < visibleStartIndex) {
-                    // 縮圖在可視範圍左側，向左移動
-                    newPosition = -activeIndex * thumbWidth;
-                } else if (activeIndex > visibleEndIndex) {
-                    // 縮圖在可視範圍右側，向右移動
-                    newPosition = -(activeIndex - thumbsPerSlide + 1) * thumbWidth;
-                }
-
-                // 限制 newPosition 不要超出範圍
-                const maxPosition = -((totalThumbs - thumbsPerSlide) * thumbWidth);
-                newPosition = Math.max(maxPosition, Math.min(0, newPosition));
-
-                currentPosition = newPosition;
-                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
-                updateNavButtons();
-            }
-
-
-            function updateNavButtons() {
-                const thumbsPerSlide = getThumbsPerSlide() || 4;
-                const thumbWidth = $thumbnails.outerWidth(true);
-                const totalThumbs = $thumbnails.length;
-                const maxPosition = -((totalThumbs - thumbsPerSlide) * thumbWidth);
-
-                // 如果縮圖數少於等於 thumbsPerSlide，隱藏兩個按鈕
-                if (totalThumbs <= thumbsPerSlide) {
-                    $thumbnailPrev.add($thumbnailNext).addClass('hide');
-                } else {
-                    $thumbnailPrev.toggleClass('hide', currentPosition >= 0);
-                    $thumbnailNext.toggleClass('hide', currentPosition <= maxPosition);
-                }
-            }
-
-            $thumbnails.click(function () {
-                currentIndex = $(this).index();
-                updateMainImage();
+            // 計算能容納的縮圖數量，至少為1
+            const thumbs = Math.max(1, Math.floor(containerWidth / thumbWidth));
+            
+            console.log({
+                windowWidth,
+                containerWidth,
+                thumbWidth,
+                calculatedThumbs: thumbs
             });
 
-            $thumbnailNext.click(function () {
-                const thumbWidth = $thumbnails.outerWidth(true);
-                const thumbsPerSlide = getThumbsPerSlide();
-                const slideWidth = thumbsPerSlide * thumbWidth;
-                const maxPosition = -(($thumbnails.length - thumbsPerSlide) * thumbWidth);
-                currentPosition = Math.max(currentPosition - slideWidth, maxPosition);
-                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
-                updateNavButtons();
-            });
+            return thumbs;
+        }
 
-            $thumbnailPrev.click(function () {
-                const thumbWidth = $thumbnails.outerWidth(true);
-                const thumbsPerSlide = getThumbsPerSlide();
-                const slideWidth = thumbsPerSlide * thumbWidth;
-                currentPosition = Math.min(currentPosition + slideWidth, 0);
-                $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
-                updateNavButtons();
-            });
+        function updateMainImage() {
+            const largeSrc = $thumbnails.eq(currentIndex).data('large-src');
+            $mainImage.attr('src', largeSrc);
+            $thumbnails.removeClass('active').eq(currentIndex).addClass('active');
+            scrollToActiveThumbnail();
+        }
 
-            $mainImageNext.click(function () {
-                currentIndex = (currentIndex + 1) % $thumbnails.length;
-                updateMainImage();
-            });
+        function scrollToActiveThumbnail() {
+            const thumbsPerSlide = getThumbsPerSlide();
+            const thumbWidth = $thumbnails.outerWidth(true);
+            const totalThumbs = $thumbnails.length;
 
-            $mainImagePrev.click(function () {
-                currentIndex = (currentIndex - 1 + $thumbnails.length) % $thumbnails.length;
-                updateMainImage();
-            });
-
-           $zoomButton.click(function () {
-                $mainImageContainer.toggleClass('zoomed');
-                if ($mainImageContainer.hasClass('zoomed')) {
-                    $mainImage.css({ 'transform': 'scale(2)', 'cursor': 'grab' });
-                    $mainImage.draggable({
-                        cursor: 'grab',
-                        drag: function (event, ui) {
-                            const rect = $mainImage[0].getBoundingClientRect();
-                            const containerRect = $mainImageContainer[0].getBoundingClientRect();
-                            const scale = 2; // Matches the scale(2) in transform
-                            const imgWidth = $mainImage.width();
-                            const imgHeight = $mainImage.height();
-
-                            // Calculate boundaries based on scaled image size
-                            const scaledWidth = imgWidth * scale;
-                            const scaledHeight = imgHeight * scale;
-
-                            // Calculate maximum drag limits to keep image within container
-                            const maxLeft = (scaledWidth - containerRect.width) / 2;
-                            const maxTop = (scaledHeight - containerRect.height) / 2;
-                            const minLeft = -maxLeft;
-                            const minTop = -maxTop;
-
-                            // Constrain the position
-                            ui.position.left = Math.min(maxLeft, Math.max(minLeft, ui.position.left));
-                            ui.position.top = Math.min(maxTop, Math.max(minTop, ui.position.top));
-                        }
-                    });
-                    $(this).text('縮小').addClass("out");
-                } else {
-                    $mainImage.css({ 'transform': 'none', 'left': '0', 'top': '0' });
-                    $mainImage.draggable('destroy');
-                    $(this).text('放大').removeClass("out");
-                }
-            });
-
-
-            updateNavButtons();
-
-            $(window).on('resize', function () {
+            if (totalThumbs <= thumbsPerSlide) {
                 currentPosition = 0;
                 $thumbnailList.css('transform', 'translateX(0px)');
                 updateNavButtons();
-                // Reset zoom if active
-                if ($mainImageContainer.hasClass('zoomed')) {
-                    $mainImage.css({ 'left': '0', 'top': '0' });
-                }
-            });
-        });
-    }
+                return;
+            }
 
-    // Usage
-    $(document).ready(function () {
-        initializeImageGallery('.slider-container');
+            const visibleStartIndex = Math.abs(currentPosition) / thumbWidth;
+            const visibleEndIndex = visibleStartIndex + thumbsPerSlide - 1;
+
+            let newPosition = currentPosition;
+
+            if (currentIndex < visibleStartIndex) {
+                newPosition = -currentIndex * thumbWidth;
+            } else if (currentIndex > visibleEndIndex) {
+                newPosition = -(currentIndex - thumbsPerSlide + 1) * thumbWidth;
+            }
+
+            const maxPosition = -((totalThumbs - thumbsPerSlide) * thumbWidth);
+            newPosition = Math.max(maxPosition, Math.min(0, newPosition));
+
+            currentPosition = newPosition;
+            $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+            updateNavButtons();
+        }
+
+        function updateNavButtons() {
+            const thumbsPerSlide = getThumbsPerSlide();
+            const totalThumbs = $thumbnails.length;
+            const thumbWidth = $thumbnails.outerWidth(true);
+            const maxPosition = totalThumbs <= thumbsPerSlide ? 0 : -((totalThumbs - thumbsPerSlide) * thumbWidth);
+
+            $thumbnailPrev.removeClass('hide');
+            $thumbnailNext.removeClass('hide');
+
+            if (totalThumbs <= thumbsPerSlide) {
+                $thumbnailPrev.addClass('hide');
+                $thumbnailNext.addClass('hide');
+            } else {
+                if (currentPosition < 0) {
+                    $thumbnailPrev.removeClass('hide');
+                } else {
+                    $thumbnailPrev.addClass('hide');
+                }
+                if (currentPosition > maxPosition) {
+                    $thumbnailNext.removeClass('hide');
+                } else {
+                    $thumbnailNext.addClass('hide');
+                }
+            }
+
+            console.log({
+                totalThumbs,
+                thumbsPerSlide,
+                currentPosition,
+                maxPosition,
+                prevVisible: !$thumbnailPrev.hasClass('hide'),
+                nextVisible: !$thumbnailNext.hasClass('hide')
+            });
+        }
+
+        $thumbnails.click(function () {
+            currentIndex = $(this).index();
+            updateMainImage();
+        });
+
+        $thumbnailNext.click(function () {
+            const thumbWidth = $thumbnails.outerWidth(true);
+            const thumbsPerSlide = getThumbsPerSlide();
+            const slideWidth = thumbsPerSlide * thumbWidth;
+            const maxPosition = -(($thumbnails.length - thumbsPerSlide) * thumbWidth);
+            currentPosition = Math.max(currentPosition - slideWidth, maxPosition);
+            $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+            updateNavButtons();
+        });
+
+        $thumbnailPrev.click(function () {
+            const thumbWidth = $thumbnails.outerWidth(true);
+            const thumbsPerSlide = getThumbsPerSlide();
+            const slideWidth = thumbsPerSlide * thumbWidth;
+            currentPosition = Math.min(currentPosition + slideWidth, 0);
+            $thumbnailList.css('transform', `translateX(${currentPosition}px)`);
+            updateNavButtons();
+        });
+
+        $mainImageNext.click(function () {
+            currentIndex = (currentIndex + 1) % $thumbnails.length;
+            updateMainImage();
+        });
+
+        $mainImagePrev.click(function () {
+            currentIndex = (currentIndex - 1 + $thumbnails.length) % $thumbnails.length;
+            updateMainImage();
+        });
+
+        $zoomButton.click(function () {
+            $mainImageContainer.toggleClass('zoomed');
+            if ($mainImageContainer.hasClass('zoomed')) {
+                $mainImage.css({ 'transform': 'scale(2)', 'cursor': 'grab' });
+                $mainImage.draggable({
+                    cursor: 'grab',
+                    drag: function (event, ui) {
+                        const rect = $mainImage[0].getBoundingClientRect();
+                        const containerRect = $mainImageContainer[0].getBoundingClientRect();
+                        const scale = 2;
+                        const imgWidth = $mainImage.width();
+                        const imgHeight = $mainImage.height();
+
+                        const scaledWidth = imgWidth * scale;
+                        const scaledHeight = imgHeight * scale;
+
+                        const maxLeft = (scaledWidth - containerRect.width) / 2;
+                        const maxTop = (scaledHeight - containerRect.height) / 2;
+                        const minLeft = -maxLeft;
+                        const minTop = -maxTop;
+
+                        ui.position.left = Math.min(maxLeft, Math.max(minLeft, ui.position.left));
+                        ui.position.top = Math.min(maxTop, Math.max(minTop, ui.position.top));
+                    }
+                });
+                $(this).text('縮小').addClass("out");
+            } else {
+                $mainImage.css({ 'transform': 'none', 'left': '0', 'top': '0' });
+                $mainImage.draggable('destroy');
+                $(this).text('放大').removeClass("out");
+            }
+        });
+
+        $(window).on('resize', function () {
+            $thumbnails = $thumbnailList.find('img');
+            currentPosition = 0;
+            $thumbnailList.css('transform', 'translateX(0px)');
+            updateNavButtons();
+            scrollToActiveThumbnail();
+            if ($mainImageContainer.hasClass('zoomed')) {
+                $mainImage.css({ 'left': '0', 'top': '0' });
+            }
+        });
+
+        updateNavButtons();
     });
+}
+
+$(document).ready(function () {
+    initializeImageGallery('.slider-container');
+    	//-------------------比對照片查詢-----------------------
+	$(".js-comparison-search").click(function(){
+		$(".js-comparison-result").addClass("d-block");
+	})
+});
 </script>
 </body>
 
